@@ -1,10 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CALCULATOR</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<form action="/result1.php" method="GET">
+    <input type="text" name="floor1" maxlength="8">
+    <select name="operation">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="/">/</option>
+        <option value="*">*</option>
+    </select>
+    <input type="text" name="floor2" maxlength="8">
+    <input type="submit" value="COUNT">
+</form>
+</body>
+</html>
+
 <?php
 if (empty($_GET['floor1']) && empty($_GET['floor2'])) {
     $errorMsg = "Nothing passed";
 } elseif (empty($_GET['floor1']) || empty($_GET['floor2'])) {
     $errorMsg = "Arguments 1 or 2 not passed";
-} elseif (strlen($_GET['floor1']) > 8 || strlen($_GET['floor2']) > 8) {
-    $errorMsg = "Maximum 8 characters allowed for each argument";
 } elseif (!is_numeric($_GET['floor1']) || !is_numeric($_GET['floor2'])) {
     $errorMsg = "Both arguments should be numeric values";
 } else {
@@ -26,7 +45,6 @@ if (empty($_GET['floor1']) && empty($_GET['floor2'])) {
             case "*":
                 $result = $floor1 * $floor2;
                 break;
-            // Удален блок default, чтобы не выводить сообщение об ошибке "Operation not supported".
         }
         if (!isset($errorMsg)) {
             $expression = $floor1 . ' ' . $operation . ' ' . $floor2 . ' =';
